@@ -1,0 +1,56 @@
+{
+  "transforms": [
+    {
+      "output_variable": "action_name",
+      "type": "input"
+    },
+    {
+      "output_variable": "package_name",
+      "type": "input"
+    },
+    {
+      "output_variable": "author",
+      "type": "input"
+    },
+    {
+      "input_path": "package*.json",
+      "string_replace": {
+        "old": "fnew-package-name",
+        "new": "$package_name"
+      },
+      "type": "file_string_replace"
+    },
+    {
+      "input_path": "package*.json",
+      "string_replace": {
+        "old": "fnew-author",
+        "new": "$author"
+      },
+      "type": "file_string_replace"
+    },
+    {
+      "input_path": "README.md",
+      "string_replace": {
+        "old": "fnew-name",
+        "new": "$action_name"
+      },
+      "type": "file_string_replace"
+    },
+    {
+      "input_path": "action.yml",
+      "string_replace": {
+        "old": "fnew-name",
+        "new": "$action_name"
+      },
+      "type": "file_string_replace"
+    },
+    {
+      "input_path": "action.yml",
+      "string_replace": {
+        "old": "fnew-author",
+        "new": "$author"
+      },
+      "type": "file_string_replace"
+    }
+  ]
+}
