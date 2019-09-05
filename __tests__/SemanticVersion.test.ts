@@ -1,4 +1,4 @@
-import { SemanticVersion } from '../src/SemanticVersion'
+import { SemanticVersion, VersionType } from '../src/SemanticVersion'
 
 describe('SemanticVersion', () => {
     describe('creation', () => {
@@ -23,8 +23,61 @@ describe('SemanticVersion', () => {
         })
 
         it('defaults values when omitted', () => {
-            const version = SemanticVersion.fromTag('1.0.0', 'v', 'stable')
+            const version = SemanticVersion.fromTag('1', 'v', 'stable')
             expect(version).toEqual(expectedVersion(1, 0, 0))
+        })
+    })
+
+    describe('type', () => {
+        it('defaults to major version', () => {
+            const version = SemanticVersion.fromTag('0.0.0')
+            expect(version.type).toEqual(VersionType.Major)
+        })
+
+        it('is major version', () => {
+            const version = SemanticVersion.fromTag('1.0.0')
+            expect(version.type).toEqual(VersionType.Major)
+        })
+
+        it('is minor version', () => {
+            const version = SemanticVersion.fromTag('1.1.0')
+            expect(version.type).toEqual(VersionType.Major)
+        })
+
+        it('is patch version', () => {
+            const version = SemanticVersion.fromTag('1.1.1')
+            expect(version.type).toEqual(VersionType.Patch)
+        })
+
+        it('is micro patch version', () => {
+            const version = SemanticVersion.fromTag('1.1.1.1')
+            expect(version.type).toEqual(VersionType.MicroPatch)
+        })
+    })
+
+    describe('toTag', () => {
+        it('4 digits', () => {
+            const version = SemanticVersion.fromTag('1.1.1.1', 'v', 'stable')
+            const tag = version.toTag('v', '-stable', 4)
+            expect(tag).toEqual('v1.1.1.1-stable')
+        })
+
+        it('3 digits', () => {
+            const version = SemanticVersion.fromTag('1.1.1.1', 'v', 'stable')
+            const tag = version.toTag('v', '-stable', 3)
+            expect(tag).toEqual('v1.1.1-stable')
+        })
+
+        it('2 digits', () => {
+            const version = SemanticVersion.fromTag('1.1.1.1', 'v', 'stable')
+            const tag = version.toTag('v', '-stable', 2)
+            expect(tag).toEqual('v1.1-stable')
+        })
+
+        it('1 digits', () => {
+            const version = SemanticVersion.fromTag('1.1.1.1', 'v', 'stable')
+            const tag = version.toTag('v', '-stable', 1)
+            expect(tag).toEqual('v1-stable')
         })
     })
 
