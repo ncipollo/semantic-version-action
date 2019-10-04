@@ -5,11 +5,8 @@ inputs:
   baseBranch:
     description: 'The base branch to compare major and minor tags with. Defaults to master'
     default: 'master'
-  outputFile:
-    description: 'The path for diff output json file. Defaults to version-diff.json'
-    default: 'version-diff.json'
   tag:
-    description: 'An optional tag for the release. If this is omitted the git ref will be used (if it is a tag).'
+    description: 'An optional tag to be used for comparison. If this is omitted the git ref will be used (if it is a tag).'
     default: ''
   token:
     description: 'The Github token.'
