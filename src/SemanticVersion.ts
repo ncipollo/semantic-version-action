@@ -5,25 +5,34 @@ export class SemanticVersion {
     readonly microPatch: number
 
     static fromTag(tag: string, tagPrefix: string = "", tagSuffix: string = ""): SemanticVersion {
-        const tagWithoutPrefix = this.trimPrefix(tag, tagPrefix)
-        const version = this.trimSuffix(tagWithoutPrefix, tagSuffix)
+        const version = this.parseVersionString(tag)
         const versionNumbers = version.split(".").map((part) => parseInt(part))
 
         return new this(versionNumbers)
     }
 
-    private static trimPrefix(text: string, prefix: string): string {
-        if (text && prefix && text.startsWith(prefix)) {
-            return text.substr(prefix.length, text.length)
+    private static parseVersionString(tag: String): string {
+        let matches = tag.match('([0-9]\d*).([0-9]\d*).([0-9]\d*).([0-9]\d*)')
+        if(matches) {
+            return matches[0]
         }
-        return text
-    }
 
-    private static trimSuffix(text: string, suffix: string): string {
-        if (text && suffix && text.endsWith(suffix)) {
-            return text.substr(0, suffix.length)
+        matches = tag.match('([0-9]\d*).([0-9]\d*).([0-9]\d*)')
+        if(matches) {
+            return matches[0]
         }
-        return text
+
+        matches = tag.match('([0-9]\d*).([0-9]\d*)')
+        if(matches) {
+            return matches[0]
+        }
+
+        matches = tag.match('([0-9]\d*)')
+        if(matches) {
+            return matches[0]
+        }
+
+        return ""
     }
 
     constructor(versionNumbers: number[]) {
