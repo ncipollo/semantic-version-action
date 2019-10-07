@@ -25,10 +25,12 @@ export class Action {
 
     private outputVersionInfo(version: TagVersion) {
         core.setOutput('tag', version.tag)
+
         core.setOutput('major', version.version.major.toString())
         core.setOutput('minor', version.version.minor.toString())
         core.setOutput('patch', version.version.patch.toString())
         core.setOutput('microPatch', version.version.microPatch.toString())
+        core.setOutput('type', version.version.type.toString())
     }
 
     private outputPreviousTag(previousVersion: TagVersion | null) {

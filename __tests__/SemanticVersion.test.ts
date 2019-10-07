@@ -62,7 +62,7 @@ describe('SemanticVersion', () => {
 
         it('is minor version', () => {
             const version = SemanticVersion.fromTag('1.1.0')
-            expect(version.type).toEqual(VersionType.Major)
+            expect(version.type).toEqual(VersionType.Minor)
         })
 
         it('is patch version', () => {

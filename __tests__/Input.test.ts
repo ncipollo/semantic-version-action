@@ -16,21 +16,6 @@ describe('Inputs', () => {
         inputs = new CoreInputs(context)
     })
 
-    it('returns baseBranch', () => {
-        mockGetInput.mockReturnValue('master')
-        expect(inputs.baseBranch).toBe('master')
-    })
-
-    it('returns outputFile', () => {
-        mockGetInput.mockReturnValue('version-diff.json')
-        expect(inputs.outputFile).toBe('version-diff.json')
-    })
-
-    it('returns token', () => {
-        mockGetInput.mockReturnValue('42')
-        expect(inputs.token).toBe('42')
-    })
-
     describe('tag', () => {
         it('returns input tag', () => {
             mockGetInput.mockReturnValue('tag')

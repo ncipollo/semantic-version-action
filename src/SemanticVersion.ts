@@ -43,7 +43,7 @@ export class SemanticVersion {
             return VersionType.MicroPatch
         } else if (this.patch > 0) {
             return VersionType.Patch
-        } else if (this.patch > 0) {
+        } else if (this.minor > 0) {
             return VersionType.Minor
         } else {
             return VersionType.Major
@@ -75,8 +75,8 @@ export class SemanticVersion {
 }
 
 export enum VersionType {
-    Major,
-    Minor,
-    Patch,
-    MicroPatch
+    Major = "major",
+    Minor = "minor",
+    Patch = "patch",
+    MicroPatch = "microPatch"
 }

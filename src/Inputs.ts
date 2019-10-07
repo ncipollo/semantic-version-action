@@ -2,10 +2,7 @@ import { Context } from "@actions/github/lib/context";
 import * as core from '@actions/core';
 
 export interface Inputs {
-    readonly baseBranch: string
-    readonly outputFile:string
     readonly tag: string
-    readonly token: string
 }
 
 export class CoreInputs implements Inputs {
@@ -13,14 +10,6 @@ export class CoreInputs implements Inputs {
 
     constructor(context: Context) {
         this.context = context
-    }
-
-    get baseBranch(): string {
-        return core.getInput('baseBranch')
-    }
-
-    get outputFile(): string {
-        return core.getInput('outputFile')
     }
 
     get tag(): string {
@@ -36,9 +25,5 @@ export class CoreInputs implements Inputs {
         }
 
         throw Error("No tag found in ref or input!")
-    }
-
-    get token(): string {
-        return core.getInput('token', { required: true })
     }
 }

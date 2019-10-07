@@ -1,5 +1,4 @@
 import {exec} from '@actions/exec';
-import {ExecOptions} from '@actions/exec/lib/interfaces';
 
 export interface Tags {
     tags(): Promise<string[]>
