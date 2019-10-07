@@ -21,7 +21,30 @@ the following information:
 ## Example
 
 ```yml
-name: Action
+name: Semantic Version
+
+on: 
+  push:
+    tags:
+    - '*'
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Process version of the tag
+      id: version
+      uses: ncipollo/semantic-version-action@v1
+    - name: Dump steps context
+      env:
+        STEPS_CONTEXT: ${{ toJson(steps.version.outputs) }}
+      run: echo "$STEPS_CONTEXT"
+    - name: Dump previous tag
+      env:
+        PREVIOUS_TAG: ${{ steps.version.outputs.previous_tag }}
+      run: echo "$PREVIOUS_TAG"
 ```
 
 ## Notes
