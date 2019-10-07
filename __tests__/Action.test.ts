@@ -18,9 +18,9 @@ describe('Action', () => {
         expect(mockSetOutput).toBeCalledWith('major', '1')
         expect(mockSetOutput).toBeCalledWith('minor', '0')
         expect(mockSetOutput).toBeCalledWith('patch', '1')
-        expect(mockSetOutput).toBeCalledWith('microPatch', '1')
+        expect(mockSetOutput).toBeCalledWith('micro_patch', '1')
         expect(mockSetOutput).toBeCalledWith('type', 'microPatch')
-        expect(mockSetOutput).toBeCalledWith('previousTag', 'v1.0.0')
+        expect(mockSetOutput).toBeCalledWith('previous_tag', 'v1.0.0')
     })
 
     it('sets correct output for new tag without existing tags', async () => {
@@ -32,9 +32,9 @@ describe('Action', () => {
         expect(mockSetOutput).toBeCalledWith('major', '0')
         expect(mockSetOutput).toBeCalledWith('minor', '1')
         expect(mockSetOutput).toBeCalledWith('patch', '0')
-        expect(mockSetOutput).toBeCalledWith('microPatch', '0')
+        expect(mockSetOutput).toBeCalledWith('micro_patch', '0')
         expect(mockSetOutput).toBeCalledWith('type', 'minor')
-        expect(mockSetOutput).not.toBeCalledWith('previousTag', 'v1.0.0')
+        expect(mockSetOutput).not.toBeCalledWith('previous_tag', 'v1.0.0')
     })
 
     function createAction(newTag: string = '1.0.1.1', tagStrings = ['v1.1.0', 'v1.0.0']): Action {
