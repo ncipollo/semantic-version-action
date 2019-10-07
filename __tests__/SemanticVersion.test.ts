@@ -76,30 +76,35 @@ describe('SemanticVersion', () => {
         })
     })
 
-    describe('toTag', () => {
-        it('4 digits', () => {
-            const version = SemanticVersion.fromTag('1.1.1.1')
-            const tag = version.toTag('v', '-stable', 4)
-            expect(tag).toEqual('v1.1.1.1-stable')
-        })
+    it('compare correctly sorts versions', () => {
+         const sortedVersions = [
+            SemanticVersion.fromTag('0.0.0'),
+            SemanticVersion.fromTag('1.0.0'),
+            SemanticVersion.fromTag('0.0.1'),
+            SemanticVersion.fromTag('0.1.0'),
+            SemanticVersion.fromTag('0.1.1'),
+            SemanticVersion.fromTag('0.10.1'),
+            SemanticVersion.fromTag('1.1.0'),
+            SemanticVersion.fromTag('1.0.1'),
+            SemanticVersion.fromTag('1.1.1'),
+            SemanticVersion.fromTag('0.0.0.1'),
+         ].sort((a,b) => a.compare(b))
 
-        it('3 digits', () => {
-            const version = SemanticVersion.fromTag('1.1.1.1')
-            const tag = version.toTag('v', '-stable', 3)
-            expect(tag).toEqual('v1.1.1-stable')
-        })
 
-        it('2 digits', () => {
-            const version = SemanticVersion.fromTag('1.1.1.1')
-            const tag = version.toTag('v', '-stable', 2)
-            expect(tag).toEqual('v1.1-stable')
-        })
+         const expectedVersions = [
+            SemanticVersion.fromTag('0.0.0'),
+            SemanticVersion.fromTag('0.0.0.1'),
+            SemanticVersion.fromTag('0.0.1'),
+            SemanticVersion.fromTag('0.1.0'),
+            SemanticVersion.fromTag('0.1.1'),
+            SemanticVersion.fromTag('0.10.1'),
+            SemanticVersion.fromTag('1.0.0'),
+            SemanticVersion.fromTag('1.0.1'),
+            SemanticVersion.fromTag('1.1.0'),
+            SemanticVersion.fromTag('1.1.1')
+         ]
 
-        it('1 digits', () => {
-            const version = SemanticVersion.fromTag('1.1.1.1')
-            const tag = version.toTag('v', '-stable', 1)
-            expect(tag).toEqual('v1-stable')
-        })
+         expect(sortedVersions).toEqual(expectedVersions)
     })
 
     it('is not equal to different versions', () => {
@@ -108,6 +113,12 @@ describe('SemanticVersion', () => {
         expect(version).not.toEqual(expectedVersion(0, 0, 1))
         expect(version).not.toEqual(expectedVersion(0, 1))
         expect(version).not.toEqual(expectedVersion(1))
+    })
+
+    it('toString provides string representation of version', () => {
+        const version = SemanticVersion.fromTag('1.1.1.1')
+        const tag = version.toString()
+        expect(tag).toEqual('1.1.1.1')
     })
 
     function expectedVersion(major: number = 0,

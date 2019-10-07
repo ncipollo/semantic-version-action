@@ -12,22 +12,22 @@ export class SemanticVersion {
 
     private static parseVersionString(tag: String): string {
         let matches = tag.match('([0-9]+).([0-9]+).([0-9]+).([0-9]+)')
-        if(matches) {
+        if (matches) {
             return matches[0]
         }
 
         matches = tag.match('([0-9]+).([0-9]+).([0-9]+)')
-        if(matches) {
+        if (matches) {
             return matches[0]
         }
 
         matches = tag.match('([0-9]+).([0-9]+)')
-        if(matches) {
+        if (matches) {
             return matches[0]
         }
 
         matches = tag.match('([0-9]+)')
-        if(matches) {
+        if (matches) {
             return matches[0]
         }
 
@@ -50,15 +50,15 @@ export class SemanticVersion {
         }
     }
 
-    toTag(prefix: string = "", suffix: string = "", digits: number = 3): string {
-        if (digits >= 4) {
-            return `${prefix}${this.major}.${this.minor}.${this.patch}.${this.microPatch}${suffix}`
-        } else if (digits == 3) {
-            return `${prefix}${this.major}.${this.minor}.${this.patch}${suffix}`
-        } else if (digits == 2) {
-            return `${prefix}${this.major}.${this.minor}${suffix}`
+    compare(other: SemanticVersion): number {
+        if (this.major != other.major) {
+            return this.major - other.major;
+        } else if (this.minor != other.minor) {
+            return this.minor - other.minor;
+        } else if (this.patch != other.patch) {
+            return this.patch - other.patch;
         } else {
-            return `${prefix}${this.major}${suffix}`
+            return this.microPatch - other.microPatch;
         }
     }
 
@@ -67,6 +67,10 @@ export class SemanticVersion {
             && this.minor == other.minor
             && this.patch == other.patch
             && this.microPatch == other.microPatch
+    }
+
+    toString(): string {
+        return `${this.major}.${this.minor}.${this.patch}.${this.microPatch}`
     }
 }
 
