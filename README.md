@@ -47,5 +47,3 @@ jobs:
       run: echo "$PREVIOUS_TAG"
 ```
 
-## Notes
-
