@@ -107,12 +107,19 @@ describe('SemanticVersion', () => {
          expect(sortedVersions).toEqual(expectedVersions)
     })
 
-    it('is not equal to different versions', () => {
-        const version = SemanticVersion.fromTag('v0.0.0')
-        expect(version).not.toEqual(expectedVersion(0, 0, 0, 1))
-        expect(version).not.toEqual(expectedVersion(0, 0, 1))
-        expect(version).not.toEqual(expectedVersion(0, 1))
-        expect(version).not.toEqual(expectedVersion(1))
+    describe('equals', () => {
+        it('is true when versions are same', () => {
+            const version = SemanticVersion.fromTag('v1.1.1.1')
+            expect(version.equals(expectedVersion(1, 1, 1, 1))).toBeTruthy()
+        })
+
+        it('is false when versions are different', () => {
+            const version = SemanticVersion.fromTag('v0.0.0')
+            expect(version.equals(expectedVersion(0, 0, 0, 1))).toBeFalsy()
+            expect(version.equals(expectedVersion(0, 0, 1))).toBeFalsy()
+            expect(version.equals(expectedVersion(0, 1))).toBeFalsy()
+            expect(version.equals(expectedVersion(1))).toBeFalsy()
+        })
     })
 
     it('toString provides string representation of version', () => {

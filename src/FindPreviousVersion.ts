@@ -1,12 +1,16 @@
-import {TagVersion} from './TagVersion'
+import { TagVersion } from './TagVersion'
+import { SemanticVersion } from './SemanticVersion'
 
 export function findPreviousVersion(version: TagVersion, tags: string[]): TagVersion | null {
     const versions = tagsToVersion(tags)
-    versions.push(version)
-    versions.sort((a,b) => a.compare(b))
+    addVersionIfNeeded(version, versions)
+    versions.sort((a, b) => a.compare(b))
 
-    const index = versions.findIndex((value,_index,_array) => value == version)
-    if(index > 0) {
+    const index = versions.findIndex((value, _index, _array) => {
+        return value.version.equals(version.version)
+    })
+
+    if (index > 0) {
         return versions[index - 1]
     } else {
         return null
@@ -15,4 +19,13 @@ export function findPreviousVersion(version: TagVersion, tags: string[]): TagVer
 
 function tagsToVersion(tags: string[]): TagVersion[] {
     return tags.map((tags) => TagVersion.fromTag(tags))
+}
+
+function addVersionIfNeeded(version: TagVersion, versions: TagVersion[]) {
+    const index = versions.findIndex((value, _index, _array) => {
+        return value.version.equals(version.version)
+    })
+    if (index == -1) {
+        versions.push(version)
+    }
 }
