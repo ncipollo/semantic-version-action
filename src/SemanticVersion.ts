@@ -78,5 +78,5 @@ export enum VersionType {
     Major = "major",
     Minor = "minor",
     Patch = "patch",
-    MicroPatch = "microPatch"
+    MicroPatch = "micro_patch"
 }
