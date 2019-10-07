@@ -9,6 +9,6 @@ runs:
   using: 'node12'
   main: 'lib/Main.js'
 branding:
-  icon: 'tag'
+  icon: 'hash'
   color: 'gray-dark'
 
