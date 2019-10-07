@@ -1,4 +1,4 @@
-name: 'Semantic Version Diff'
+name: 'Semantic Version'
 description: 'Provides semantic version information about a tag'
 author: 'Nick Cipollo'
 inputs:
