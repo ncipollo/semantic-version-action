@@ -31,6 +31,10 @@ describe('TagVersion', () => {
         })
     })
 
+    it('creates creates version using fromTag', () => {
+        expect(TagVersion.fromTag('v1.0.0-hotfix')).toEqual(createVersion('v1.0.0-hotfix'))
+    })
+
     function createVersion(tag: string): TagVersion {
         return new TagVersion(tag, SemanticVersion.fromTag(tag))
     }
