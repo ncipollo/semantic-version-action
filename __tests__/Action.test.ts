@@ -19,7 +19,7 @@ describe('Action', () => {
         expect(mockSetOutput).toBeCalledWith('minor', '0')
         expect(mockSetOutput).toBeCalledWith('patch', '1')
         expect(mockSetOutput).toBeCalledWith('micro_patch', '1')
-        expect(mockSetOutput).toBeCalledWith('type', 'microPatch')
+        expect(mockSetOutput).toBeCalledWith('type', 'micro_patch')
         expect(mockSetOutput).toBeCalledWith('previous_tag', 'v1.0.0')
     })
 
