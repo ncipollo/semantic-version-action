@@ -1,16 +1,9 @@
 name: 'Semantic Version Diff'
-description: 'Creates github releases'
+description: 'Provides semantic version information about a tag'
 author: 'Nick Cipollo'
 inputs:
-  baseBranch:
-    description: 'The base branch to compare major and minor tags with. Defaults to master'
-    default: 'master'
   tag:
     description: 'An optional tag to be used for comparison. If this is omitted the git ref will be used (if it is a tag).'
-    default: ''
-  token:
-    description: 'The Github token.'
-    required: true
     default: ''
 runs:
   using: 'node12'
