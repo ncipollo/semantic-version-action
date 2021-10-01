@@ -9,7 +9,11 @@ async function run() {
     const action = createAction()
     await action.perform()
   } catch (error) {
-    core.setFailed(error.message);
+    if (error instanceof Error) {
+      core.setFailed(error.message);
+    } else {
+      core.setFailed(`Failed: ${error}`);
+    }
   }
 }
 
