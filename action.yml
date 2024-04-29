@@ -6,7 +6,7 @@ inputs:
     description: 'An optional tag to be used for comparison. If this is omitted the git ref will be used (if it is a tag).'
     default: ''
 runs:
-  using: 'node12'
+  using: 'node20'
   main: 'lib/Main.js'
 branding:
   icon: 'hash'
